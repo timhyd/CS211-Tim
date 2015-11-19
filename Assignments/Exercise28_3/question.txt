@@ -1,0 +1,5 @@
+(Implement DFS using a stack) The depth-first search algorithm described in
+Listing 28.8 uses recursion. Design a new algorithm without using recursion.
+Describe it using pseudocode. Implement it by defining a new class named
+UnweightedGraphWithNonrecursiveDFS that extends UnweightedGraph
+and overriding the dfs method.

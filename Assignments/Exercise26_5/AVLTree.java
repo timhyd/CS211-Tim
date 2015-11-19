@@ -2,11 +2,13 @@
 public class AVLTree<E extends Comparable<E>> extends BST<E> {
   /** Create a default AVL tree */
   public AVLTree() {
+     size = 0;
   }
 
   /** Create an AVL tree from an array of objects */
   public AVLTree(E[] objects) {
     super(objects);
+    size = objects.length;
   }
 
   @Override /** Override createNewNode to create an AVLTreeNode */
@@ -21,6 +23,7 @@ public class AVLTree<E extends Comparable<E>> extends BST<E> {
       return false; // e is already in the tree
     else {
       balancePath(e); // Balance from e to the root if necessary
+      size++;
     }
 
     return true; // e is inserted
