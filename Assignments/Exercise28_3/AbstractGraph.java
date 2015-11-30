@@ -3,18 +3,18 @@ import java.util.*;
 
 public abstract class AbstractGraph<V> implements Graph<V> {
   protected List<V> vertices = new ArrayList<>(); // Store vertices
-  protected List<List<Edge>> neighbors 
+  protected List<List<Edge>> neighbors
     = new ArrayList<>(); // Adjacency lists
 
   /** Construct an empty graph */
   protected AbstractGraph() {
   }
-  
+
   /** Construct a graph from vertices and edges stored in arrays */
   protected AbstractGraph(V[] vertices, int[][] edges) {
     for (int i = 0; i < vertices.length; i++)
       addVertex(vertices[i]);
-    
+
     createAdjacencyLists(edges, vertices.length);
   }
 
@@ -22,23 +22,23 @@ public abstract class AbstractGraph<V> implements Graph<V> {
   protected AbstractGraph(List<V> vertices, List<Edge> edges) {
     for (int i = 0; i < vertices.size(); i++)
       addVertex(vertices.get(i));
-        
+
     createAdjacencyLists(edges, vertices.size());
   }
 
   /** Construct a graph for integer vertices 0, 1, 2 and edge list */
   protected AbstractGraph(List<Edge> edges, int numberOfVertices) {
-    for (int i = 0; i < numberOfVertices; i++) 
+    for (int i = 0; i < numberOfVertices; i++)
       addVertex((V)(new Integer(i))); // vertices is {0, 1, ...}
-    
+
     createAdjacencyLists(edges, numberOfVertices);
   }
 
   /** Construct a graph from integer vertices 0, 1, and edge array */
   protected AbstractGraph(int[][] edges, int numberOfVertices) {
-    for (int i = 0; i < numberOfVertices; i++) 
+    for (int i = 0; i < numberOfVertices; i++)
       addVertex((V)(new Integer(i))); // vertices is {0, 1, ...}
-    
+
     createAdjacencyLists(edges, numberOfVertices);
   }
 
@@ -83,7 +83,7 @@ public abstract class AbstractGraph<V> implements Graph<V> {
     List<Integer> result = new ArrayList<>();
     for (Edge e: neighbors.get(index))
       result.add(e.v);
-    
+
     return result;
   }
 
@@ -109,8 +109,8 @@ public abstract class AbstractGraph<V> implements Graph<V> {
     vertices.clear();
     neighbors.clear();
   }
-  
-  @Override /** Add a vertex to the graph */  
+
+  @Override /** Add a vertex to the graph */
   public boolean addVertex(V vertex) {
     if (!vertices.contains(vertex)) {
       vertices.add(vertex);
@@ -122,14 +122,14 @@ public abstract class AbstractGraph<V> implements Graph<V> {
     }
   }
 
-  /** Add an edge to the graph */  
+  /** Add an edge to the graph */
   protected boolean addEdge(Edge e) {
     if (e.u < 0 || e.u > getSize() - 1)
       throw new IllegalArgumentException("No such index: " + e.u);
 
     if (e.v < 0 || e.v > getSize() - 1)
       throw new IllegalArgumentException("No such index: " + e.v);
-    
+
     if (!neighbors.get(e.u).contains(e)) {
       neighbors.get(e.u).add(e);
       return true;
@@ -138,28 +138,28 @@ public abstract class AbstractGraph<V> implements Graph<V> {
       return false;
     }
   }
-  
-  @Override /** Add an edge to the graph */  
+
+  @Override /** Add an edge to the graph */
   public boolean addEdge(int u, int v) {
     return addEdge(new Edge(u, v));
   }
-  
+
   /** Edge inner class inside the AbstractGraph class */
   public static class Edge {
     public int u; // Starting vertex of the edge
     public int v; // Ending vertex of the edge
-    
+
     /** Construct an edge for (u, v) */
     public Edge(int u, int v) {
       this.u = u;
       this.v = v;
     }
-    
+
     public boolean equals(Object o) {
-      return u == ((Edge)o).u && v == ((Edge)o).v; 
+      return u == ((Edge)o).u && v == ((Edge)o).v;
     }
   }
-  
+
   @Override /** Obtain a DFS tree starting from vertex v */
   /** To be discussed in Section 28.6 */
   public Tree dfs(int v) {
@@ -182,6 +182,7 @@ public abstract class AbstractGraph<V> implements Graph<V> {
   private void dfs(int u, int[] parent, List<Integer> searchOrder,
       boolean[] isVisited) {
     // Store the visited vertex
+
     searchOrder.add(u);
     isVisited[u] = true; // Vertex v visited
 
@@ -190,7 +191,7 @@ public abstract class AbstractGraph<V> implements Graph<V> {
         parent[e.v] = u; // The parent of vertex e.v is u
         dfs(e.v, parent, searchOrder, isVisited); // Recursive search
       }
-    }
+   }
   }
 
   @Override /** Starting bfs search from vertex v */
@@ -255,7 +256,7 @@ public abstract class AbstractGraph<V> implements Graph<V> {
     public int getNumberOfVerticesFound() {
       return searchOrder.size();
     }
-    
+
     /** Return the path of vertices from a vertex to the root */
     public List<V> getPath(int index) {
       ArrayList<V> path = new ArrayList<>();

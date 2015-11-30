@@ -61,7 +61,7 @@ public class BST<E extends Comparable<E>>
         parent.right = createNewNode(e);
     }
 
-    size++;
+
     return true; // Element inserted successfully
   }
 
@@ -269,4 +269,12 @@ public class BST<E extends Comparable<E>>
     root = null;
     size = 0;
   }
+  public int balenceSize(TreeNode<E> root){
+   if(hasNext){
+      balenceSize(root.left);
+      balenceSize(root.right);
+   }
+   else{return size;}
+ }
+
 }
