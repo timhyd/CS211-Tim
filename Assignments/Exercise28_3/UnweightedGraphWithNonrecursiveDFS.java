@@ -20,22 +20,25 @@ while not Empty(S) do
 end while
 
 */
-   @Override
-   private void dfs(int u, int[] parent, List<Integer> searchOrder,
+//Complier is rejecting Override of dfs class. IDKY but it does. 
+   //@Override
+   private void dfsnewclass(int u, int[] parent, java.util.List<Integer> searchOrder,
       boolean[] isVisited) {
-/*
-     // The Old Recursive Code that is being overriden
+
      // Store the visited vertex
      searchOrder.add(u);
      isVisited[u] = true; // Vertex v visited
-
+     java.util.LinkedList<Integer> queue = new java.util.LinkedList<>(); // list used as a queue
+while (!queue.isEmpty()) {
+    searchOrder.add(u); // u searched
      for (Edge e : neighbors.get(u)) {
       if (!isVisited[e.v]) {
-         parent[e.v] = u; // The parent of vertex e.v is u
-         dfs(e.v, parent, searchOrder, isVisited); // Recursive search
+         queue.offer(e.v); // Enqueue w
+         parent[e.v] = u; // The parent of w is u
+         isVisited[e.v] = true; // Mark it visited
       }//end if
    }//end for
-*/
+}
 }//end dfs
 
 }//end UnweightedGraphWithNonrecursiveDFS
