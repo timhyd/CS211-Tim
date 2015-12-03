@@ -3,7 +3,13 @@
 public class BST<E extends Comparable<E>>
     extends AbstractTree<E> {
   protected TreeNode<E> root;
-  protected int size = 0;
+  int size = 1;
+
+  public E find(int k, AVLTreeNode<E> root){
+     AVLTreeNode<E> A = (AVLTreeNode<E>) root.left;
+     AVLTreeNode<E> B =
+     if(A)
+ }
 
   /** Create a default binary tree */
   public BST() {
@@ -42,7 +48,8 @@ public class BST<E extends Comparable<E>>
       // Locate the parent node
       TreeNode<E> parent = null;
       TreeNode<E> current = root;
-      while (current != null)
+      while (current != null){
+        current.size++;
         if (e.compareTo(current.element) < 0) {
           parent = current;
           current = current.left;
@@ -53,7 +60,7 @@ public class BST<E extends Comparable<E>>
         }
         else
           return false; // Duplicate node not inserted
-
+}
       // Create the new node and attach it to the parent node
       if (e.compareTo(parent.element) < 0)
         parent.left = createNewNode(e);

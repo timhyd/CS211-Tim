@@ -16,18 +16,28 @@ public class AVLTree<E extends Comparable<E>> extends BST<E> {
     return new AVLTreeNode<E>(e);
   }
 
-  @Override /** Insert an element and rebalance if necessary */
+  @Override /** Insert element o into the binary tree
+  * Return true if the element is inserted successfully */
   public boolean insert(E e) {
-    boolean successful = super.insert(e);
-    if (!successful)
-      return false; // e is already in the tree
+    if (root == null)
+      root = createNewNode(e); // Create a new root
     else {
-      balancePath(e); // Balance from e to the root if necessary
-      size++;
-    }
-
-    return true; // e is inserted
-  }
+      // Locate the parent node
+      TreeNode<E> parent = null;
+      TreeNode<E> current = root;
+      while (current != null){
+        current.size++;
+        if (e.compareTo(current.element) < 0) {
+          parent = current;
+          current = current.left;
+        }
+        else if (e.compareTo(current.element) > 0) {
+          parent = current;
+          current = current.right;
+        }
+        else
+          return false; // Duplicate node not inserted
+}
 
   /** Update the height of a specified node */
   private void updateHeight(AVLTreeNode<E> node) {

@@ -13,9 +13,22 @@ public class BST<E extends Comparable<E>>
   /** Create a default binary tree */
   public BST() {
   }
-  public BST<E> clone(){
+  public BST<E> clone() throws CloneNotSupportedException {
      BST<E> clone = new BST<>();
+     copy(this.root, tree);
+     return tree;
   }
+  private void copy(TreeNode<E>s, BST<E> t) {
+     if(s != null){
+        t.insert(s.element);
+        copy(s.left, t);
+        copy(s.right, t);
+     }
+ }
+  public boolean equals(Object o) {
+     ArrayList<E> list1 = this.getElementsInorder():
+     ArrayList<E> list2
+ }
   public BST<E> copyLeft(){}
   public BST<E> copyRight(){}
   public boolean equals(BST<E> checkTree){
